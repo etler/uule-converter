@@ -7,6 +7,8 @@ module.exports = {
   "**/*.ts": "eslint",
   // Dependency changes can potentially cause type change build fails, so re-lint the entire project when they update
   "package-lock.json": () => "./scripts/lint",
+  // Changes to the proto base file will break generated static protobuf encoder
+  "src/proto/uule.proto": () => "./scripts/lint-generated",
   // Make sure package.json and package-lock.json are in sync when dependencies update
   "package.json|package-lock.json": () => "npm install --frozen-lockfile",
 }

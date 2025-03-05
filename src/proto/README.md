@@ -1,0 +1,1 @@
+The `uule-proto.d.ts` file is generated via `protobuf-cli` using the `uule.proto` file as a source. The static encoder is used to keep the bundle size minimal. To prevent the files from getting out of sync, the `package.json` `lint` script will check if the generated file matches.

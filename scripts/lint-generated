@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+
+exit_code=0
+
+DIR="$(cd "$(dirname "$0")" && pwd)"
+if ! [ "$($DIR/generate-proto-types | cksum)" = "$(cksum "$DIR/../src/proto/uule-proto.d.ts" | cut -d ' ' -f 1,2)" ]; then
+  echo "src/proto/uule-proto.d.ts is out of date"
+  exit_code=1
+fi
+
+exit $exit_code

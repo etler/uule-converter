@@ -4,7 +4,7 @@ import eslintPluginPrettier from "eslint-plugin-prettier/recommended"
 
 export default tseslint.config({
   files: ["**/*.ts"],
-  ignores: ["dist/*", "types/*"],
+  ignores: ["dist/*", "types/*", "src/proto/*"],
   extends: [
     eslint.configs.recommended,
     tseslint.configs.strictTypeChecked,
@@ -48,6 +48,7 @@ export default tseslint.config({
     "no-underscore-dangle": "error",
     "no-unreachable-loop": "error",
     "no-useless-computed-key": "error",
+    "no-useless-rename": "error",
     "no-var": "error",
     "object-shorthand": "error",
     "operator-assignment": "error",
