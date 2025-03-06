@@ -4,9 +4,9 @@ import { Uule } from "@/proto/uule-proto"
 
 export interface CanonicalUule {
   type: "canonical"
+  canonicalName: string
   role?: number
   producer?: number
-  canonicalName: string
 }
 
 export function encodeCanonicalUule({

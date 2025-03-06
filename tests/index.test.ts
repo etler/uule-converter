@@ -26,7 +26,7 @@ describe("UULE Converter", () => {
         expect(decoded.role).toBe(1)
         expect(decoded.producer).toBe(12)
         expect(decoded.provenance).toBe(6)
-        expect(decoded.timestamp).toBe(1591521249034000)
+        expect(decoded.timestamp).toBe(1591521249034)
         expect(decoded.radius).toBe(93000)
       }
     })
@@ -71,7 +71,7 @@ describe("UULE Converter", () => {
         role: 1,
         producer: 12,
         provenance: 6,
-        timestamp: 1591521249034000,
+        timestamp: 1591521249034,
         radius: 93000,
       } as const
 
@@ -106,7 +106,7 @@ describe("UULE Converter", () => {
         role: 1,
         producer: 12,
         provenance: 6,
-        timestamp: 1591521249034000,
+        timestamp: 1591521249034,
         radius: 93000,
       } as const
 

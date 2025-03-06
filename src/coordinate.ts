@@ -18,14 +18,14 @@ export function encodeCoordinateUule({
   role = 1,
   producer = 12,
   provenance = 0,
-  timestamp = Date.now() * 1e3,
+  timestamp = Date.now(),
   radius = -1,
 }: CoordinateUule): string {
   const uuleCoordinateString = `
 role:${role}
 producer:${producer}
 provenance:${provenance}
-timestamp:${timestamp}
+timestamp:${timestamp * 1e3}
 latlng{
 latitude_e7:${Math.floor(latitude * 1e7)}
 longitude_e7:${Math.floor(longitude * 1e7)}
@@ -61,7 +61,7 @@ export function decodeCoordinateUule(uuleString: string): CoordinateUule | Error
     role,
     producer,
     provenance,
-    timestamp,
+    timestamp: timestamp !== undefined ? timestamp / 1e3 : undefined,
     latitude: latitudeE7 / 1e7,
     longitude: longitudeE7 / 1e7,
     radius,
