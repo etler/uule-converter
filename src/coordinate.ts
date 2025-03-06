@@ -1,3 +1,6 @@
+import { fromUriSafeBase64, toUriSafeBase64 } from "@/uriSafeBase64"
+import type { ErrorResult } from "@/index"
+
 export interface CoordinateUule {
   type: "coordinate"
   latitude: number
@@ -29,14 +32,12 @@ longitude_e7:${Math.floor(longitude * 1e7)}
 }
 radius:${radius}
 `.trim()
-  console.log(uuleCoordinateString)
-  const base64Uule = btoa(uuleCoordinateString).replace(/\+/g, "-").replace(/\//g, "_")
-  return `a+${encodeURIComponent(base64Uule)}`
+  const base64Uule = toUriSafeBase64(uuleCoordinateString)
+  return encodeURIComponent(base64Uule)
 }
 
-export function decodeCoordinateUule(uuleString: string): CoordinateUule {
-  const normalizedUuleString = decodeURIComponent(uuleString).replace(/-/g, "+").replace(/_/g, "/")
-  const decodedUule = atob(normalizedUuleString)
+export function decodeCoordinateUule(uuleString: string): CoordinateUule | ErrorResult {
+  const decodedUule = fromUriSafeBase64(uuleString)
   const {
     latitude_e7: latitudeE7,
     longitude_e7: longitudeE7,
@@ -53,7 +54,7 @@ export function decodeCoordinateUule(uuleString: string): CoordinateUule {
     }),
   )
   if (latitudeE7 === undefined || longitudeE7 === undefined) {
-    throw new Error("Unable to parse coordinate UULE latitude and longitude")
+    return { type: "error", message: "Unable to parse coordinate UULE latitude and longitude" }
   }
   return {
     type: "coordinate",
