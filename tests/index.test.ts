@@ -31,6 +31,18 @@ describe("UULE Converter", () => {
       }
     })
 
+    it("should decode uri encoded canonical UULE correctly", () => {
+      const uule = "w%20CAIQICImV2VzdCBOZXcgWW9yayxOZXcgSmVyc2V5LFVuaXRlZCBTdGF0ZXM%3D"
+      const decoded = decodeUule(uule)
+
+      expect(decoded.type).toBe("canonical")
+      if (decoded.type === "canonical") {
+        expect(decoded.canonicalName).toBe("West New York,New Jersey,United States")
+        expect(decoded.role).toBe(2)
+        expect(decoded.producer).toBe(32)
+      }
+    })
+
     it("should return error for invalid UULE string", () => {
       const decoded = decodeUule("invalid")
       expect(decoded.type).toBe("error")
@@ -60,7 +72,7 @@ describe("UULE Converter", () => {
       } as const
 
       const encoded = encodeUule(canonicalUuleData)
-      expect(encoded).toBe("w+CAIQICImV2VzdCBOZXcgWW9yayxOZXcgSmVyc2V5LFVuaXRlZCBTdGF0ZXM%3D")
+      expect(encoded).toBe("w+CAIQICImV2VzdCBOZXcgWW9yayxOZXcgSmVyc2V5LFVuaXRlZCBTdGF0ZXM=")
     })
 
     it("should encode coordinate UULE correctly", () => {

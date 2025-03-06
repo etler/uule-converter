@@ -9,7 +9,7 @@ export interface ErrorResult {
 }
 
 export function decodeUule(uuleString: string): CanonicalUule | CoordinateUule | ErrorResult {
-  const [format, data] = uuleString.split("+")
+  const [format, data] = decodeURIComponent(uuleString).split(/\+| /)
   if (format === undefined || data === undefined) {
     return {
       type: "error",
